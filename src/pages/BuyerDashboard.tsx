@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { 
-  Package, 
-  Heart, 
-  Store, 
-  User, 
-  Star, 
-  Calendar,
-  ShoppingCart,
+import {
+  Package,
+  Heart,
+  Store,
+  User,
+  Star,
   Eye,
   Trash2,
   Edit,
@@ -17,12 +15,17 @@ import {
   Phone,
   Lock
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { mockProducts } from '../data/mockData';
 import { ProductCard } from '../components/UI/ProductCard';
+import { useApp } from '../contexts/AppContext';
 
 export function BuyerDashboard() {
   const [activeTab, setActiveTab] = useState('orders');
   const [editingProfile, setEditingProfile] = useState(false);
+  const { state } = useApp(); // context fallback
+  const wishlistItems = state?.wishlist || mockProducts.slice(0, 6); // TODO: Replace with backend state once ready
+
   const [profileForm, setProfileForm] = useState({
     name: 'Alex Johnson',
     email: 'alex@example.com',
@@ -43,7 +46,6 @@ export function BuyerDashboard() {
     { id: 'profile', label: 'Profile Settings', icon: User },
   ];
 
-  // Mock data
   const orders = [
     {
       id: 'ORD-123456',
@@ -79,15 +81,13 @@ export function BuyerDashboard() {
     },
   ];
 
-  const wishlistItems = mockProducts.slice(0, 6);
-
   const savedShops = [
     {
       id: '1',
       name: 'Modern Living Co.',
       description: 'Contemporary furniture and home accessories',
-      banner: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800&h=200&fit=crop',
-      avatar: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop',
+      banner: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg',
+      avatar: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg',
       rating: 4.8,
       products: 45,
       followers: 1200
@@ -96,8 +96,8 @@ export function BuyerDashboard() {
       id: '2',
       name: 'Artisan Rugs',
       description: 'Handcrafted rugs from around the world',
-      banner: 'https://images.pexels.com/photos/1571463/pexels-photo-1571463.jpeg?auto=compress&cs=tinysrgb&w=800&h=200&fit=crop',
-      avatar: 'https://images.pexels.com/photos/1571463/pexels-photo-1571463.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop',
+      banner: 'https://images.pexels.com/photos/1571463/pexels-photo-1571463.jpeg',
+      avatar: 'https://images.pexels.com/photos/1571463/pexels-photo-1571463.jpeg',
       rating: 4.6,
       products: 28,
       followers: 850
@@ -106,8 +106,8 @@ export function BuyerDashboard() {
       id: '3',
       name: 'Urban Lighting',
       description: 'Industrial and modern lighting solutions',
-      banner: 'https://images.pexels.com/photos/1395967/pexels-photo-1395967.jpeg?auto=compress&cs=tinysrgb&w=800&h=200&fit=crop',
-      avatar: 'https://images.pexels.com/photos/1395967/pexels-photo-1395967.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop',
+      banner: 'https://images.pexels.com/photos/1395967/pexels-photo-1395967.jpeg',
+      avatar: 'https://images.pexels.com/photos/1395967/pexels-photo-1395967.jpeg',
       rating: 4.7,
       products: 62,
       followers: 2100
@@ -122,35 +122,31 @@ export function BuyerDashboard() {
   };
 
   const handleProfileSave = () => {
-    // Handle profile update logic here
+    // TODO: Hook this up to backend API or state
     setEditingProfile(false);
   };
 
   const handleProfileCancel = () => {
     setEditingProfile(false);
-    // Reset form to original values
   };
 
   const removeFromWishlist = (productId: string) => {
-    // Handle wishlist removal
+    // TODO: Remove item from wishlist state
     console.log('Remove from wishlist:', productId);
   };
 
   const unfollowShop = (shopId: string) => {
-    // Handle shop unfollow
+    // TODO: Unfollow shop logic
     console.log('Unfollow shop:', shopId);
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">My Account</h1>
-          <p className="text-gray-600">Manage your orders, wishlist, and account settings</p>
-        </div>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">My Account</h1>
+        <p className="text-gray-600 mb-8">Manage your orders, wishlist, and account settings</p>
 
-        {/* Tabs */}
+        {/* Tab Navigation */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 mb-8">
           <div className="border-b border-gray-200">
             <nav className="flex space-x-8 px-6">
@@ -175,54 +171,38 @@ export function BuyerDashboard() {
           </div>
 
           <div className="p-6">
-            {/* My Orders Tab */}
+            {/* Individual Tab Content */}
             {activeTab === 'orders' && (
               <div>
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-semibold text-gray-900">My Orders</h2>
-                  <span className="text-sm text-gray-500">{orders.length} orders</span>
-                </div>
-
+                <h2 className="text-xl font-semibold text-gray-900 mb-4">My Orders</h2>
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
-                      <tr className="border-b border-gray-200">
-                        <th className="text-left text-sm font-medium text-gray-500 pb-3">Order ID</th>
-                        <th className="text-left text-sm font-medium text-gray-500 pb-3">Products</th>
-                        <th className="text-left text-sm font-medium text-gray-500 pb-3">Total</th>
-                        <th className="text-left text-sm font-medium text-gray-500 pb-3">Date</th>
-                        <th className="text-left text-sm font-medium text-gray-500 pb-3">Status</th>
-                        <th className="text-left text-sm font-medium text-gray-500 pb-3">Actions</th>
+                      <tr className="border-b border-gray-200 text-left text-sm text-gray-500">
+                        <th className="pb-3">Order ID</th>
+                        <th className="pb-3">Products</th>
+                        <th className="pb-3">Total</th>
+                        <th className="pb-3">Date</th>
+                        <th className="pb-3">Status</th>
+                        <th className="pb-3">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       {orders.map((order) => (
                         <tr key={order.id} className="border-b border-gray-100">
-                          <td className="py-4">
-                            <span className="font-medium text-gray-900">{order.id}</span>
-                          </td>
+                          <td className="py-4 font-medium text-gray-900">{order.id}</td>
                           <td className="py-4">
                             <div className="max-w-xs">
-                              {order.products.length === 1 ? (
-                                <span className="text-gray-700">{order.products[0]}</span>
-                              ) : (
-                                <div>
-                                  <span className="text-gray-700">{order.products[0]}</span>
-                                  <span className="text-sm text-gray-500 block">
-                                    +{order.products.length - 1} more item{order.products.length > 2 ? 's' : ''}
-                                  </span>
-                                </div>
+                              {order.products[0]}
+                              {order.products.length > 1 && (
+                                <span className="block text-sm text-gray-500">
+                                  +{order.products.length - 1} more item{order.products.length > 2 ? 's' : ''}
+                                </span>
                               )}
                             </div>
                           </td>
-                          <td className="py-4">
-                            <span className="font-semibold text-gray-900">${order.total}</span>
-                          </td>
-                          <td className="py-4">
-                            <span className="text-gray-600">
-                              {new Date(order.date).toLocaleDateString()}
-                            </span>
-                          </td>
+                          <td className="py-4 font-semibold text-gray-900">${order.total}</td>
+                          <td className="py-4 text-gray-600">{new Date(order.date).toLocaleDateString()}</td>
                           <td className="py-4">
                             <span className={`px-2 py-1 rounded-full text-xs font-medium ${statusColors[order.status as keyof typeof statusColors]}`}>
                               {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
@@ -230,11 +210,11 @@ export function BuyerDashboard() {
                           </td>
                           <td className="py-4">
                             <div className="flex items-center space-x-2">
-                              <button className="p-1 rounded hover:bg-gray-100 transition-colors" title="View Details">
+                              <button title="View Details" className="p-1 rounded hover:bg-gray-100 transition-colors">
                                 <Eye className="h-4 w-4 text-gray-600" />
                               </button>
                               {order.trackingNumber && (
-                                <button className="p-1 rounded hover:bg-gray-100 transition-colors" title="Track Package">
+                                <button title="Track Package" className="p-1 rounded hover:bg-gray-100 transition-colors">
                                   <Package className="h-4 w-4 text-blue-600" />
                                 </button>
                               )}
@@ -248,14 +228,9 @@ export function BuyerDashboard() {
               </div>
             )}
 
-            {/* Wishlist Tab */}
             {activeTab === 'wishlist' && (
               <div>
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-semibold text-gray-900">My Wishlist</h2>
-                  <span className="text-sm text-gray-500">{wishlistItems.length} items</span>
-                </div>
-
+                <h2 className="text-xl font-semibold text-gray-900 mb-4">My Wishlist</h2>
                 {wishlistItems.length > 0 ? (
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {wishlistItems.map((product) => (
@@ -276,54 +251,34 @@ export function BuyerDashboard() {
                     <Heart className="h-16 w-16 text-gray-300 mx-auto mb-4" />
                     <h3 className="text-lg font-medium text-gray-900 mb-2">Your wishlist is empty</h3>
                     <p className="text-gray-600 mb-6">Save items you love to your wishlist</p>
-                    <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                    <Link to="/" className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
                       Browse Products
-                    </button>
+                    </Link>
                   </div>
                 )}
               </div>
             )}
 
-            {/* Saved Shops Tab */}
             {activeTab === 'shops' && (
               <div>
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-semibold text-gray-900">Saved Shops</h2>
-                  <span className="text-sm text-gray-500">{savedShops.length} shops</span>
-                </div>
-
+                <h2 className="text-xl font-semibold text-gray-900 mb-4">Saved Shops</h2>
                 {savedShops.length > 0 ? (
                   <div className="space-y-6">
                     {savedShops.map((shop) => (
                       <div key={shop.id} className="bg-gray-50 rounded-xl overflow-hidden">
-                        {/* Shop Banner */}
                         <div className="relative h-32">
-                          <img
-                            src={shop.banner}
-                            alt={shop.name}
-                            className="w-full h-full object-cover"
-                          />
+                          <img src={shop.banner} alt={shop.name} className="w-full h-full object-cover" />
                           <div className="absolute inset-0 bg-black/20"></div>
                         </div>
-
-                        {/* Shop Info */}
                         <div className="p-6">
                           <div className="flex items-start space-x-4">
-                            {/* Shop Avatar */}
-                            <img
-                              src={shop.avatar}
-                              alt={shop.name}
-                              className="w-16 h-16 rounded-full object-cover border-4 border-white -mt-8 relative z-10"
-                            />
-
-                            {/* Shop Details */}
-                            <div className="flex-1 min-w-0">
+                            <img src={shop.avatar} alt={shop.name} className="w-16 h-16 rounded-full border-4 border-white -mt-8 relative z-10 object-cover" />
+                            <div className="flex-1">
                               <div className="flex items-center justify-between">
                                 <div>
                                   <h3 className="text-lg font-semibold text-gray-900">{shop.name}</h3>
-                                  <p className="text-gray-600 text-sm mb-2">{shop.description}</p>
-                                  
-                                  <div className="flex items-center space-x-4 text-sm text-gray-500">
+                                  <p className="text-gray-600 text-sm">{shop.description}</p>
+                                  <div className="flex items-center space-x-4 text-sm text-gray-500 mt-2">
                                     <div className="flex items-center space-x-1">
                                       <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                                       <span>{shop.rating}</span>
@@ -332,18 +287,13 @@ export function BuyerDashboard() {
                                     <span>{shop.followers.toLocaleString()} followers</span>
                                   </div>
                                 </div>
-
                                 <div className="flex items-center space-x-3">
-                                  <button
-                                    onClick={() => unfollowShop(shop.id)}
-                                    className="text-red-600 hover:text-red-700 p-2 rounded-lg hover:bg-red-50 transition-colors"
-                                    title="Unfollow shop"
-                                  >
+                                  <button onClick={() => unfollowShop(shop.id)} className="text-red-600 hover:text-red-700 p-2 rounded-lg hover:bg-red-50 transition-colors" title="Unfollow shop">
                                     <X className="h-5 w-5" />
                                   </button>
-                                  <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                  <Link to={`/storefront/${shop.id}`} className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                                     Visit Store
-                                  </button>
+                                  </Link>
                                 </div>
                               </div>
                             </div>
@@ -357,220 +307,11 @@ export function BuyerDashboard() {
                     <Store className="h-16 w-16 text-gray-300 mx-auto mb-4" />
                     <h3 className="text-lg font-medium text-gray-900 mb-2">No saved shops</h3>
                     <p className="text-gray-600 mb-6">Follow your favorite sellers to see their latest products</p>
-                    <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                    <Link to="/" className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
                       Discover Shops
-                    </button>
+                    </Link>
                   </div>
                 )}
-              </div>
-            )}
-
-            {/* Profile Settings Tab */}
-            {activeTab === 'profile' && (
-              <div>
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-semibold text-gray-900">Profile Settings</h2>
-                  {!editingProfile && (
-                    <button
-                      onClick={() => setEditingProfile(true)}
-                      className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-medium"
-                    >
-                      <Edit className="h-4 w-4" />
-                      <span>Edit Profile</span>
-                    </button>
-                  )}
-                </div>
-
-                <div className="space-y-8">
-                  {/* Personal Information */}
-                  <div className="bg-gray-50 rounded-xl p-6">
-                    <div className="flex items-center space-x-2 mb-6">
-                      <User className="h-5 w-5 text-blue-600" />
-                      <h3 className="text-lg font-semibold text-gray-900">Personal Information</h3>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                        {editingProfile ? (
-                          <input
-                            type="text"
-                            value={profileForm.name}
-                            onChange={(e) => setProfileForm({...profileForm, name: e.target.value})}
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                          />
-                        ) : (
-                          <p className="text-gray-900 py-2">{profileForm.name}</p>
-                        )}
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                        {editingProfile ? (
-                          <div className="relative">
-                            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-                            <input
-                              type="email"
-                              value={profileForm.email}
-                              onChange={(e) => setProfileForm({...profileForm, email: e.target.value})}
-                              className="w-full border border-gray-300 rounded-lg pl-10 pr-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            />
-                          </div>
-                        ) : (
-                          <p className="text-gray-900 py-2">{profileForm.email}</p>
-                        )}
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                        {editingProfile ? (
-                          <div className="relative">
-                            <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-                            <input
-                              type="tel"
-                              value={profileForm.phone}
-                              onChange={(e) => setProfileForm({...profileForm, phone: e.target.value})}
-                              className="w-full border border-gray-300 rounded-lg pl-10 pr-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            />
-                          </div>
-                        ) : (
-                          <p className="text-gray-900 py-2">{profileForm.phone}</p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Default Address */}
-                  <div className="bg-gray-50 rounded-xl p-6">
-                    <div className="flex items-center space-x-2 mb-6">
-                      <MapPin className="h-5 w-5 text-blue-600" />
-                      <h3 className="text-lg font-semibold text-gray-900">Default Shipping Address</h3>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="md:col-span-2">
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Street Address</label>
-                        {editingProfile ? (
-                          <input
-                            type="text"
-                            value={profileForm.address}
-                            onChange={(e) => setProfileForm({...profileForm, address: e.target.value})}
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                          />
-                        ) : (
-                          <p className="text-gray-900 py-2">{profileForm.address}</p>
-                        )}
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">City</label>
-                        {editingProfile ? (
-                          <input
-                            type="text"
-                            value={profileForm.city}
-                            onChange={(e) => setProfileForm({...profileForm, city: e.target.value})}
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                          />
-                        ) : (
-                          <p className="text-gray-900 py-2">{profileForm.city}</p>
-                        )}
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">State</label>
-                        {editingProfile ? (
-                          <input
-                            type="text"
-                            value={profileForm.state}
-                            onChange={(e) => setProfileForm({...profileForm, state: e.target.value})}
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                          />
-                        ) : (
-                          <p className="text-gray-900 py-2">{profileForm.state}</p>
-                        )}
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">ZIP Code</label>
-                        {editingProfile ? (
-                          <input
-                            type="text"
-                            value={profileForm.zipCode}
-                            onChange={(e) => setProfileForm({...profileForm, zipCode: e.target.value})}
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                          />
-                        ) : (
-                          <p className="text-gray-900 py-2">{profileForm.zipCode}</p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Change Password */}
-                  {editingProfile && (
-                    <div className="bg-gray-50 rounded-xl p-6">
-                      <div className="flex items-center space-x-2 mb-6">
-                        <Lock className="h-5 w-5 text-blue-600" />
-                        <h3 className="text-lg font-semibold text-gray-900">Change Password</h3>
-                      </div>
-
-                      <div className="space-y-4 max-w-md">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">Current Password</label>
-                          <input
-                            type="password"
-                            value={profileForm.currentPassword}
-                            onChange={(e) => setProfileForm({...profileForm, currentPassword: e.target.value})}
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder="Enter current password"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">New Password</label>
-                          <input
-                            type="password"
-                            value={profileForm.newPassword}
-                            onChange={(e) => setProfileForm({...profileForm, newPassword: e.target.value})}
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder="Enter new password"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">Confirm New Password</label>
-                          <input
-                            type="password"
-                            value={profileForm.confirmPassword}
-                            onChange={(e) => setProfileForm({...profileForm, confirmPassword: e.target.value})}
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder="Confirm new password"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Action Buttons */}
-                  {editingProfile && (
-                    <div className="flex items-center space-x-4">
-                      <button
-                        onClick={handleProfileSave}
-                        className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center space-x-2"
-                      >
-                        <Save className="h-4 w-4" />
-                        <span>Save Changes</span>
-                      </button>
-                      <button
-                        onClick={handleProfileCancel}
-                        className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors flex items-center space-x-2"
-                      >
-                        <X className="h-4 w-4" />
-                        <span>Cancel</span>
-                      </button>
-                    </div>
-                  )}
-                </div>
               </div>
             )}
           </div>
