@@ -9,80 +9,45 @@ export function HomePage() {
   const newProducts = mockProducts.filter(p => p.new);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-br from-[#fdf8f3] to-[#f6eee7] text-[#3d2f2f]">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-50 via-white to-emerald-50 py-20 px-4">
+      <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Content */}
             <div>
-              <div className="flex items-center space-x-2 mb-6">
-                <Sparkles className="h-6 w-6 text-amber-500" />
-                <span className="text-amber-600 font-medium">Discover Unique Home Décor</span>
+              <div className="flex items-center space-x-2 mb-4">
+                <Sparkles className="h-6 w-6 text-[#c2926b]" />
+                <span className="text-[#9f6d42] font-medium">Timeless Home Style</span>
               </div>
-              
-              <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                Transform Your
-                <span className="text-blue-600 block">Living Space</span>
+              <h1 className="text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-6 text-[#3d2f2f]">
+                Craft a Cozy
+                <span className="block text-[#a76e46]">Living Experience</span>
               </h1>
-              
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Discover handcrafted furniture, unique décor pieces, and custom designs 
-                from talented sellers worldwide. Create the home of your dreams.
+              <p className="text-lg text-[#6e5c52] mb-8 max-w-xl">
+                Explore curated furnishings and décor that elevate warmth and character—one piece at a time.
               </p>
-              
-              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   to="/products"
-                  className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center space-x-2"
+                  className="bg-[#a76e46] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#8e5a38] transition"
                 >
-                  <span>Shop Now</span>
-                  <ArrowRight className="h-5 w-5" />
+                  Shop Now
                 </Link>
                 <Link
                   to="/customize"
-                  className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg font-semibold hover:border-gray-400 transition-colors flex items-center justify-center space-x-2"
+                  className="border-2 border-[#d3bba3] text-[#3d2f2f] px-8 py-4 rounded-lg font-semibold hover:bg-[#f9f2ec] transition"
                 >
-                  <Palette className="h-5 w-5" />
-                  <span>AI Customize</span>
+                  <Palette className="inline-block w-5 h-5 mr-2" />
+                  AI Customize
                 </Link>
               </div>
             </div>
-
-            {/* Hero Image */}
-            <div className="relative">
-              <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
-                <img
-                  src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800"
-                  alt="Beautiful modern living room"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              
-              {/* Floating Cards */}
-              <div className="absolute -top-4 -left-4 bg-white rounded-lg shadow-lg p-4 w-48">
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center">
-                    <Home className="h-6 w-6 text-emerald-600" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">10,000+</p>
-                    <p className="text-sm text-gray-600">Happy Customers</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="absolute -bottom-4 -right-4 bg-white rounded-lg shadow-lg p-4 w-48">
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <TrendingUp className="h-6 w-6 text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">5,000+</p>
-                    <p className="text-sm text-gray-600">Products Available</p>
-                  </div>
-                </div>
-              </div>
+            <div className="aspect-square overflow-hidden rounded-3xl shadow-xl">
+              <img
+                src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800"
+                alt="Living Room Cozy"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </div>
@@ -90,35 +55,32 @@ export function HomePage() {
 
       {/* Categories */}
       <section className="py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Shop by Category</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Find the perfect pieces for every room in your home
-            </p>
-          </div>
-
+        <div className="max-w-7xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-[#3d2f2f] mb-4">Shop by Category</h2>
+          <p className="text-[#6e5c52] max-w-2xl mx-auto mb-12">
+            Thoughtfully curated pieces for every corner of your home.
+          </p>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { name: 'Furniture', image: 'https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb&w=400', count: '1,200+' },
               { name: 'Lighting', image: 'https://images.pexels.com/photos/1395967/pexels-photo-1395967.jpeg?auto=compress&cs=tinysrgb&w=400', count: '800+' },
               { name: 'Decor', image: 'https://images.pexels.com/photos/1571459/pexels-photo-1571459.jpeg?auto=compress&cs=tinysrgb&w=400', count: '2,000+' },
               { name: 'Rugs', image: 'https://images.pexels.com/photos/1571463/pexels-photo-1571463.jpeg?auto=compress&cs=tinysrgb&w=400', count: '600+' },
-            ].map((category) => (
+            ].map((cat) => (
               <Link
-                key={category.name}
-                to={`/products?category=${category.name.toLowerCase()}`}
-                className="group relative aspect-square rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"
+                key={cat.name}
+                to={`/products?category=${cat.name.toLowerCase()}`}
+                className="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition"
               >
                 <img
-                  src={category.image}
-                  alt={category.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  src={cat.image}
+                  alt={cat.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                 />
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
-                  <h3 className="text-xl font-bold mb-1">{category.name}</h3>
-                  <p className="text-sm opacity-90">{category.count} items</p>
+                  <h3 className="text-xl font-bold mb-1">{cat.name}</h3>
+                  <p className="text-sm">{cat.count} items</p>
                 </div>
               </Link>
             ))}
@@ -126,26 +88,24 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Trending Products */}
-      <section className="py-16 px-4 bg-gray-50">
+      {/* Trending */}
+      <section className="py-16 px-4 bg-[#f9f2ec]">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex justify-between items-center mb-8">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">Trending Now</h2>
-              <p className="text-gray-600">Popular items our customers love</p>
+              <h2 className="text-3xl font-bold text-[#3d2f2f]">Trending Now</h2>
+              <p className="text-[#6e5c52]">Popular picks loved by our community</p>
             </div>
             <Link
               to="/products?filter=trending"
-              className="text-blue-600 hover:text-blue-700 font-medium flex items-center space-x-1"
+              className="text-[#a76e46] font-medium hover:underline flex items-center"
             >
-              <span>View All</span>
-              <ArrowRight className="h-4 w-4" />
+              View All <ArrowRight className="ml-1 w-4 h-4" />
             </Link>
           </div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {trendingProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+            {trendingProducts.map((p) => (
+              <ProductCard key={p.id} product={p} />
             ))}
           </div>
         </div>
@@ -154,44 +114,38 @@ export function HomePage() {
       {/* New Arrivals */}
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex justify-between items-center mb-8">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">New Arrivals</h2>
-              <p className="text-gray-600">Fresh designs just added to our collection</p>
+              <h2 className="text-3xl font-bold text-[#3d2f2f]">New Arrivals</h2>
+              <p className="text-[#6e5c52]">Fresh pieces to complement your space</p>
             </div>
             <Link
               to="/products?filter=new"
-              className="text-blue-600 hover:text-blue-700 font-medium flex items-center space-x-1"
+              className="text-[#a76e46] font-medium hover:underline flex items-center"
             >
-              <span>View All</span>
-              <ArrowRight className="h-4 w-4" />
+              View All <ArrowRight className="ml-1 w-4 h-4" />
             </Link>
           </div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {newProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+            {newProducts.map((p) => (
+              <ProductCard key={p.id} product={p} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-blue-600 to-emerald-600">
+      {/* CTA */}
+      <section className="py-20 px-4 bg-gradient-to-r from-[#a76e46] to-[#c08c5a] text-white">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
-            Ready to Sell Your Creations?
-          </h2>
-          <p className="text-xl text-blue-100 mb-8">
-            Join thousands of sellers and turn your passion into profit. 
-            Set up your storefront in minutes.
+          <h2 className="text-4xl font-bold mb-4">Sell Your Creations with Us</h2>
+          <p className="text-lg mb-8">
+            Join a community of creators bringing warmth and individuality to homes everywhere.
           </p>
           <Link
             to="/seller/signup"
-            className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center space-x-2"
+            className="bg-white text-[#a76e46] px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition"
           >
-            <span>Start Selling Today</span>
-            <ArrowRight className="h-5 w-5" />
+            Start Selling Today
           </Link>
         </div>
       </section>
