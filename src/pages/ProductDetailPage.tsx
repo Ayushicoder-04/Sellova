@@ -147,97 +147,98 @@ export function ProductDetailPage() {
               </div>
             </div>
           </div>
+
           {/* Right Column - AI Customize Sidebar */}
-<div className="lg:col-span-2">
-  <div className="sticky top-8">
-    <div className="bg-gradient-to-br from-[#fff0f3] to-[#fffdfd] border-2 border-dashed border-rose-200 rounded-3xl p-6 shadow-md">
-      <div className="flex items-center space-x-2 mb-4">
-        <Sparkles className="h-6 w-6 text-rose-600" />
-        <h2 className="text-xl font-bold text-gray-900">AI Customize</h2>
-      </div>
+          <div className="lg:col-span-2">
+            <div className="sticky top-8">
+              <div className="bg-gradient-to-br from-[#fff0f3] to-[#fffdfd] border-2 border-dashed border-rose-200 rounded-3xl p-6 shadow-md">
+                <div className="flex items-center space-x-2 mb-4">
+                  <Sparkles className="h-6 w-6 text-rose-600" />
+                  <h2 className="text-xl font-bold text-gray-900">AI Customize</h2>
+                </div>
 
-      <p className="text-gray-600 text-sm mb-5">
-        Tell us how you'd like this product customized. Our AI will show you a visual preview.
-      </p>
+                <p className="text-gray-600 text-sm mb-5">
+                  Tell us how you'd like this product customized. Our AI will show you a visual preview.
+                </p>
 
-      <div className="space-y-4">
-        {/* Customization Input */}
-        <div>
-          <label className="block text-sm font-medium text-gray-800 mb-1">Your Request</label>
-          <textarea
-            value={customRequest}
-            onChange={(e) => setCustomRequest(e.target.value)}
-            placeholder="e.g., Make it beige linen with golden knobs and softer curves..."
-            className="w-full h-24 px-4 py-2 text-sm border border-rose-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:outline-none resize-none"
-          />
-        </div>
+                <div className="space-y-4">
+                  {/* Customization Input */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-800 mb-1">Your Request</label>
+                    <textarea
+                      value={customRequest}
+                      onChange={(e) => setCustomRequest(e.target.value)}
+                      placeholder="e.g., Make it beige linen with golden knobs and softer curves..."
+                      className="w-full h-24 px-4 py-2 text-sm border border-rose-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:outline-none resize-none"
+                    />
+                  </div>
 
-        {/* AI Generate Button */}
-        <button
-          onClick={handleCustomize}
-          disabled={!customRequest.trim() || isCustomizing}
-          className="w-full bg-gradient-to-r from-rose-600 to-pink-500 text-white py-3 px-4 rounded-xl font-semibold hover:from-rose-700 hover:to-pink-600 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
-        >
-          {isCustomizing ? (
-            <>
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-              <span>Generating...</span>
-            </>
-          ) : (
-            <>
-              <Wand2 className="h-5 w-5" />
-              <span>Preview Custom Look</span>
-            </>
-          )}
-        </button>
+                  {/* AI Generate Button */}
+                  <button
+                    onClick={handleCustomize}
+                    disabled={!customRequest.trim() || isCustomizing}
+                    className="w-full bg-gradient-to-r from-rose-600 to-pink-500 text-white py-3 px-4 rounded-xl font-semibold hover:from-rose-700 hover:to-pink-600 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                  >
+                    {isCustomizing ? (
+                      <>
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                        <span>Generating...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Wand2 className="h-5 w-5" />
+                        <span>Preview Custom Look</span>
+                      </>
+                    )}
+                  </button>
 
-        {/* AI Preview Output */}
-        {showCustomPreview && (
-          <div className="mt-5 p-4 bg-white rounded-xl border border-rose-200 shadow-sm">
-            <h3 className="font-semibold text-gray-900 mb-2">Your AI Preview</h3>
-            <div className="aspect-square bg-gradient-to-br from-rose-50 to-orange-50 rounded-lg flex items-center justify-center mb-3">
-              <div className="text-center text-rose-400">
-                <Sparkles className="h-8 w-8 mx-auto mb-2" />
-                <p className="text-sm">AI-enhanced visualization</p>
+                  {/* AI Preview Output */}
+                  {showCustomPreview && (
+                    <div className="mt-5 p-4 bg-white rounded-xl border border-rose-200 shadow-sm">
+                      <h3 className="font-semibold text-gray-900 mb-2">Your AI Preview</h3>
+                      <div className="aspect-square bg-gradient-to-br from-rose-50 to-orange-50 rounded-lg flex items-center justify-center mb-3">
+                        <div className="text-center text-rose-400">
+                          <Sparkles className="h-8 w-8 mx-auto mb-2" />
+                          <p className="text-sm">AI-enhanced visualization</p>
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <button className="w-full bg-rose-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-rose-700 transition">
+                          Order Custom Version
+                        </button>
+                        <button className="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-lg text-sm font-medium hover:bg-gray-50 transition">
+                          Refine Request
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Popular Suggestions */}
+                  <div className="mt-6">
+                    <h4 className="text-sm font-semibold text-gray-800 mb-2">Popular Customizations</h4>
+                    <div className="space-y-2">
+                      {[
+                        'Change fabric type',
+                        'Add drawers',
+                        'Switch to metal legs',
+                        'Custom engraving'
+                      ].map((suggestion) => (
+                        <button
+                          key={suggestion}
+                          onClick={() => setCustomRequest(suggestion)}
+                          className="w-full text-left text-sm text-rose-600 hover:text-rose-700 py-1 px-2 rounded hover:bg-rose-50 transition"
+                        >
+                          {suggestion}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="space-y-2">
-              <button className="w-full bg-rose-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-rose-700 transition">
-                Order Custom Version
-              </button>
-              <button className="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-lg text-sm font-medium hover:bg-gray-50 transition">
-                Refine Request
-              </button>
-            </div>
           </div>
-        )}
 
-        {/* Popular Suggestions */}
-        <div className="mt-6">
-          <h4 className="text-sm font-semibold text-gray-800 mb-2">Popular Customizations</h4>
-          <div className="space-y-2">
-            {[
-              'Change fabric type',
-              'Add drawers',
-              'Switch to metal legs',
-              'Custom engraving'
-            ].map((suggestion) => (
-              <button
-                key={suggestion}
-                onClick={() => setCustomRequest(suggestion)}
-                className="w-full text-left text-sm text-rose-600 hover:text-rose-700 py-1 px-2 rounded hover:bg-rose-50 transition"
-              >
-                {suggestion}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-                    {/* Middle Column - Product Info */}
+          {/* Middle Column - Product Info */}
           <div className="lg:col-span-3">
             <div className="sticky top-8 space-y-6">
               {/* Seller Info */}
@@ -402,3 +403,8 @@ export function ProductDetailPage() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  );
+}
