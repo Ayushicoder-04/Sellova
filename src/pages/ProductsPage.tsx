@@ -18,13 +18,13 @@ export function ProductsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen bg-gradient-to-b from-[#fdf8f4] via-[#fefdfb] to-[#faf7f2]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-10">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">All Products</h1>
-            <p className="text-gray-600">{mockProducts.length} items found</p>
+            <h1 className="text-4xl font-bold text-rose-900 mb-2">Explore All Products</h1>
+            <p className="text-rose-500 text-sm">{mockProducts.length} items available</p>
           </div>
 
           {/* Controls */}
@@ -34,7 +34,7 @@ export function ProductsPage() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="appearance-none bg-white border border-rose-300 text-gray-800 rounded-lg px-4 py-2 pr-8 shadow-sm focus:ring-2 focus:ring-rose-500 focus:outline-none"
               >
                 {sortOptions.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -46,13 +46,13 @@ export function ProductsPage() {
             </div>
 
             {/* View Toggle */}
-            <div className="flex border border-gray-300 rounded-lg overflow-hidden">
+            <div className="flex border border-rose-300 rounded-lg overflow-hidden">
               <button
                 onClick={() => setViewMode('grid')}
                 className={`p-2 ${
                   viewMode === 'grid'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white text-gray-600 hover:bg-gray-50'
+                    ? 'bg-rose-600 text-white'
+                    : 'bg-white text-rose-600 hover:bg-rose-50'
                 }`}
               >
                 <Grid className="h-4 w-4" />
@@ -61,8 +61,8 @@ export function ProductsPage() {
                 onClick={() => setViewMode('list')}
                 className={`p-2 ${
                   viewMode === 'list'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white text-gray-600 hover:bg-gray-50'
+                    ? 'bg-rose-600 text-white'
+                    : 'bg-white text-rose-600 hover:bg-rose-50'
                 }`}
               >
                 <List className="h-4 w-4" />
@@ -72,7 +72,7 @@ export function ProductsPage() {
             {/* Filter Toggle */}
             <button
               onClick={() => setIsFilterOpen(true)}
-              className="lg:hidden flex items-center space-x-2 bg-white border border-gray-300 rounded-lg px-4 py-2 hover:bg-gray-50"
+              className="lg:hidden flex items-center space-x-2 bg-white border border-rose-300 text-rose-700 rounded-lg px-4 py-2 hover:bg-rose-50"
             >
               <Filter className="h-4 w-4" />
               <span>Filters</span>
@@ -80,7 +80,7 @@ export function ProductsPage() {
           </div>
         </div>
 
-        <div className="flex gap-8">
+        <div className="flex gap-10">
           {/* Filters - Desktop */}
           <div className="hidden lg:block w-64 flex-shrink-0">
             <FilterSidebar isOpen={true} onClose={() => {}} />
@@ -92,7 +92,7 @@ export function ProductsPage() {
           {/* Products */}
           <div className="flex-1">
             {viewMode === 'grid' ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
                 {mockProducts.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
@@ -100,24 +100,29 @@ export function ProductsPage() {
             ) : (
               <div className="space-y-6">
                 {mockProducts.map((product) => (
-                  <div key={product.id} className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
-                    <div className="flex space-x-4">
+                  <div
+                    key={product.id}
+                    className="bg-white rounded-2xl border border-rose-100 shadow-sm p-6 transition hover:shadow-md"
+                  >
+                    <div className="flex space-x-5">
                       <img
                         src={product.images[0]}
                         alt={product.name}
-                        className="w-32 h-32 object-cover rounded-lg flex-shrink-0"
+                        className="w-32 h-32 object-cover rounded-xl border border-rose-200"
                       />
                       <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">{product.name}</h3>
-                        <p className="text-gray-600 mb-3 line-clamp-2">{product.description}</p>
+                        <h3 className="text-xl font-semibold text-rose-900 mb-2">{product.name}</h3>
+                        <p className="text-rose-600 text-sm mb-3 line-clamp-2">{product.description}</p>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-2">
-                            <span className="text-xl font-bold text-gray-900">${product.price}</span>
+                            <span className="text-lg font-bold text-gray-900">${product.price}</span>
                             {product.originalPrice && (
-                              <span className="text-sm text-gray-500 line-through">${product.originalPrice}</span>
+                              <span className="text-sm text-gray-400 line-through">
+                                ${product.originalPrice}
+                              </span>
                             )}
                           </div>
-                          <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                          <button className="bg-rose-600 text-white px-4 py-2 rounded-lg hover:bg-rose-700 transition-colors text-sm font-medium">
                             Add to Cart
                           </button>
                         </div>
