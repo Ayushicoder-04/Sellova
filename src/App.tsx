@@ -13,6 +13,7 @@ import { OrderConfirmationPage } from './pages/OrderConfirmationPage';
 import { CustomizePage } from './pages/CustomizePage';
 import { BuyerDashboard } from './pages/BuyerDashboard';
 import { SellerDashboard } from './pages/SellerDashboard';
+import { BuyerHomePage } from './pages/BuyerHomePage';
 import { mockUser, mockSeller, mockProducts } from './data/mockData';
 
 function AppContent() {
