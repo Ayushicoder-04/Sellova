@@ -42,6 +42,8 @@ function AppContent() {
             <Route path="/customize" element={<CustomizePage />} />
             <Route path="/buyer/dashboard" element={<BuyerDashboard />} />
             <Route path="/seller/dashboard" element={<SellerDashboard />} />
+            <Route path="/buyer/home" element={<BuyerHomePage />} />
+
           </Routes>
         </main>
         <Footer />
