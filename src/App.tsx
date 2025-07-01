@@ -44,6 +44,7 @@ function AppContent() {
             <Route path="/buyer/dashboard" element={<BuyerDashboard />} />
             <Route path="/seller/dashboard" element={<SellerDashboard />} />
             <Route path="/buyer/home" element={<BuyerHomePage />} />
+            <Route path="/buyer/profile" element={<BuyerProfilePage />} />
 
           </Routes>
         </main>
